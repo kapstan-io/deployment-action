@@ -1,14 +1,16 @@
-on: [push]
+on: [pull_request]
 
 jobs:
   custom_test:
     runs-on: ubuntu-latest
     name: We test it locally with act
     steps:
-      - name: Get Pokemon name
+      - name: Checkout action
+        uses: actions/checkout@v2
+      - name: Kapstan Continuous Deployment Action
         uses: ./
-        id: pokemon
         with:
-          pokemon_id: 150
-      - name: Get the pokemon
-        run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+          application_id: 4f9ad184-0f81-4547-913d-1ef61aff792a
+          image_tag: lorem-ipsum
+          image_repository_name: lorem-ipsum
+          kapstan_api_key: lorem-ipsum
