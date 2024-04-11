@@ -8,7 +8,7 @@ request_body=$(cat <<EOF
 { 
   "imageTag": "$INPUT_IMAGE_TAG",
   "imageRepositoryName": "$INPUT_IMAGE_REPOSITORY_NAME",
-  "comment": "Reason: Trigger by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
+  "comment": "Reason: Trigger by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}"
 }
 EOF
 )
