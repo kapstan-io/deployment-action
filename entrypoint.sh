@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-kapstan_deployment_trigger_url="https://api.kapstan.io/v1/applications/${INPUT_APPLICATION_ID}/deploy"
+kapstan_deployment_trigger_url="https://api.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deploy"
 echo "Prepared-url: $kapstan_deployment_trigger_url"
 
 request_body=$(cat <<EOF
-{
+{ 
   "imageTag": "$INPUT_IMAGE_TAG",
   "imageRepositoryName": "$INPUT_IMAGE_REPOSITORY_NAME",
   "comment": "Reason: Trigger by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
