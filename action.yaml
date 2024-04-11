@@ -5,6 +5,12 @@ branding:
   icon: activity
   color: purple
 inputs:
+  organization_id:
+    description: "The unique identifier of the organization"
+    required: true
+  environment_id:
+    description: "The unique identifier of the environment"
+    required: true
   application_id:
     description: "The unique identifier of the application"
     required: true
@@ -21,6 +27,8 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.organization_id}}
+    - ${{ inputs.environment_id}}
     - ${{ inputs.application_id}}
     - ${{ inputs.image_tag}}
     - ${{ inputs.image_repository_name}}
