@@ -1,5 +1,9 @@
 name: "Kapstan Deployment Github Action"
-description: "Kapstan Github Action to deploy your applications directly from the Github Pipeline."
+description: "GitHub Action to deploy your applications directly from the Github Pipeline."
+author: "Kapstan"
+branding:
+  icon: activity
+  color: purple
 inputs:
   application_id:
     description: "The unique identifier of the application"
