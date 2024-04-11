@@ -16,7 +16,7 @@ EOF
 echo "Request_body: $request_body"
 
 echo "Making API call to Kapstan"
-status_code=$(curl -s -k -o /dev/null -w "%{http_code}" -X POST "$kapstan_deployment_trigger_url" \
+status_code=$(curl -sS -k -o /dev/null -w "%{http_code}" -X POST "$kapstan_deployment_trigger_url" \
   -H "Content-Type: application/json" \
   -H "x-api-key: $INPUT_KAPSTAN_API_KEY" \
   -d "$request_body")
