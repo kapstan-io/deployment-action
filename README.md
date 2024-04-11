@@ -1,2 +1,2 @@
 # deployment-action
-Kapstan Github Action for triggering Application Deployment
+GitHub Action for triggering Application Deployment
