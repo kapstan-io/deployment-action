@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-kapstan_deployment_trigger_url="https://api.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deploy"
+kapstan_deployment_trigger_url="https://api-dev.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deploy"
 echo "Prepared-url: $kapstan_deployment_trigger_url"
 
 request_body=$(cat <<EOF
