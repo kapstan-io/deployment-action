@@ -1,2 +1,2 @@
-# continuous-deployment-action
-Kapstan Github Action for Continuous Deployment
+# deployment-action
+Kapstan Github Action for triggering Application Deployment
