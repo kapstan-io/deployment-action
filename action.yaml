@@ -1,0 +1,23 @@
+name: "Kapstan Continuous Deployment Github Action"
+description: "Kapstan Github Action to deploy your applications directly from the Github Pipeline."
+inputs:
+  application_id:
+    description: "The unique identifier of the application"
+    required: true
+  image_tag:
+    description: "The image tag you want to deploy"
+    required: false
+  image_repository_name:
+    description: "The image repository name that this image tag belongs to"
+    required: true
+  kapstan_api_key:
+    description: "Your Kapstan API key"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.application_id}}
+    - ${{ inputs.image_tag}}
+    - ${{ inputs.image_repository_name}}
+    - ${{ inputs.kapstan_api_key}}
