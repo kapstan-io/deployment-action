@@ -42,8 +42,8 @@ get_deployment_status(){
   echo "Deployment Status: $DEPLOYMENT_STATUS"
 }
 
-echo "Action - $KAPSTAN_ACTION"
-case $KAPSTAN_ACTION in
+echo "Action - $INPUT_KAPSTAN_ACTION"
+case $INPUT_KAPSTAN_ACTION in
   "deploy-app")
     deployment_application
     ;;
