@@ -19,7 +19,7 @@ EOF
 
   status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
     -H "Content-Type: application/json" \
-    -H "x-api-key: $api_key" \
+    -H "x-api-key: $INPUT_API_KEY" \
     -d "$request_body")
   
   echo "Response Status Code: $status_code"
