@@ -37,11 +37,11 @@ get_deployment_status(){
   -H "x-api-key: $INPUT_KAPSTAN_API_KEY")
 
   response_body=$(cat response_body.txt)
-  rm response_body.txt
   echo "Status Code: $status_code"
   echo "Response Body: $response_body"
   DEPLOYMENT_STATUS=$(cat response_body.txt | jq -r '.stage')
   echo "Deployment Status: $DEPLOYMENT_STATUS"
+  rm response_body.txt
 }
 
 echo "Action - $INPUT_ACTION"
