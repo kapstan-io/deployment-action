@@ -23,7 +23,9 @@ EOF
     -d "$request_body")
   
   echo "Response Status Code: $status_code"
+  echo "Response Body: $(cat response_body.txt)"
   DEPLOYMENT_ID=$(cat response_body.txt | jq -r '.deployment_id')
+  echo "::set-output name=DEPLOYMENT_ID::$DEPLOYMENT_ID"
 }
 
 
