@@ -19,7 +19,7 @@ EOF
 
   status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
     -H "Content-Type: application/json" \
-    -H "x-api-key: $INPUT_API_KEY" \
+    -H "x-api-key: $INPUT_KAPSTAN_API_KEY" \
     -d "$request_body")
   
   echo "Response Status Code: $status_code"
@@ -32,7 +32,7 @@ get_deployment_status(){
   echo "API URL: $deployment_status_url"
   status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" "$deployment_status_url" \
   -H "Content-Type: application/json" \
-  -H "x-api-key: $INPUT_API_KEY")
+  -H "x-api-key: $INPUT_KAPSTAN_API_KEY")
 
   response_body=$(cat response_body.txt)
   rm response_body.txt
