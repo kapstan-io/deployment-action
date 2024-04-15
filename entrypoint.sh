@@ -14,10 +14,10 @@ deployment_application() {
 EOF
 )
 
-  echo "API URL: $kapstan_deployment_trigger_url"
+  echo "API URL: $deployment_trigger_url"
   echo "Request Body: $request_body"
 
-  status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$kapstan_deployment_trigger_url" \
+  status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
     -H "Content-Type: application/json" \
     -H "x-api-key: $api_key" \
     -d "$request_body")
