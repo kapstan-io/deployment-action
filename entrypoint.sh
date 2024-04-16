@@ -1,8 +1,10 @@
 #!/bin/bash
 
+kapstan_api_base_url="https://api.kapstan.io/external"
+
 # Function to trigger application deployment
 deployment_application() {
-  deployment_trigger_url="https://api-dev.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deploy"
+  deployment_trigger_url="$kapstan_api_base_url/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deploy"
 
   # Build the JSON request body
   request_body=$(cat <<EOF
@@ -37,7 +39,7 @@ EOF
 
 
 get_deployment_status(){
-  deployment_status_url="https://api-dev.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deployments/${DEPLOYMENT_ID}"
+  deployment_status_url="$kapstan_api_base_url/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deployments/${DEPLOYMENT_ID}"
   echo "API URL: $deployment_status_url"
   status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" "$deployment_status_url" \
   -H "Content-Type: application/json" \
@@ -61,7 +63,7 @@ check_deployment_status(){
     # keep checking if the status is completed or not, otherwise exit 1
     if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]];
     then
-        echo "KAPSTAN_DEPLOYMENT_MESSAGE='Deployment completed https://app-dev.kapstan.io/applications/application/$INPUT_APPLICATION_ID?tab=deployment'" >> "$GITHUB_ENV"
+        echo "KAPSTAN_DEPLOYMENT_MESSAGE='Deployment completed https://app.kapstan.io/applications/application/$INPUT_APPLICATION_ID?tab=deployment'" >> "$GITHUB_ENV"
         exit 0
     elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED" ]];
     then

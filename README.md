@@ -24,3 +24,5 @@ jobs:
           kapstan_api_key: [YOUR_KAPSTAN_WORKSPACE_API_KEY] # fetch from secrets
           wait_for_deployment: [true/false]
 ```
+
+> Access deployment ID and deployment message within your workflow using `KAPSTAN_DEPLOYMENT_ID` and `KAPSTAN_DEPLOYMENT_MESSAGE` enviroment variable set int `$GITHUB_ENV`
