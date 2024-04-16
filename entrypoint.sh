@@ -26,7 +26,7 @@ EOF
   echo "Response Status Code: $STATUS_CODE"
   DEPLOYMENT_ID=$(cat response_body.txt | jq -r '.deployment_id')
   
-  if [[ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2* ]] 
+  if [[ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2* ]];
   then
     echo "Failed to deploy app, err: $(cat response_body.txt)"
     exit 1
@@ -58,11 +58,11 @@ check_deployment_status(){
 
     # Your command or action here
     # For example, check if a service is running
-    if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]]
+    if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]];
     then
         echo "Deployment completed"
         exit 0
-    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || attempt == MAX_ATTEMPTS]]
+    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || attempt == MAX_ATTEMPTS ]];
     then
         echo "Deployment failed"
         exit 1
