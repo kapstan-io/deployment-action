@@ -27,13 +27,6 @@ inputs:
     description: "Checks for deployment status and waits till success/failure is returned"
     required: false
     default: "true"
-outputs:
-  deployment-id:
-    description: "The unique identifier of the deployment if no failure while triggering"
-    value: ${{ steps.kapstan.outputs.deployment-id }}
-  message:
-    description: "Message of action denoting status of deployment"
-    value: ${{ steps.kapstan.outputs.message }}
 runs:
   using: "docker"
   image: "Dockerfile"
