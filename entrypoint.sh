@@ -58,11 +58,11 @@ check_deployment_status(){
 
     # Your command or action here
     # For example, check if a service is running
-    if [ "$DEPLOYMENT_STATUS" == "STAGE_COMPLETED" ]
+    if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]]
     then
         echo "Deployment completed"
         exit 0
-    elif [ "$DEPLOYMENT_STATUS" == "STAGE_FAILED" ]
+    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || attempt == MAX_ATTEMPTS]]
     then
         echo "Deployment failed"
         exit 1
