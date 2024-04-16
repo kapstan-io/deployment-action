@@ -62,6 +62,7 @@ check_deployment_status(){
         echo "Deployment completed"
         exit 0
     elif $DEPLOYMENT_STATUS == "STAGE_FAILED"
+    then
         echo "Deployment failed"
         exit 1
     else
