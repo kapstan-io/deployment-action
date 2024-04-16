@@ -23,6 +23,13 @@ inputs:
   kapstan_api_key:
     description: "Your Kapstan API key"
     required: true
+outputs:
+  deployment-id:
+    description: "The unique identifier of the deployment if no failure while triggering"
+    value: ${{ steps.kapstan-deployment-action.outputs.deployment-id }}
+  message:
+    description: "Message of action denoting status of deployment"
+    value: ${{ steps.kapstan-deployment-action.outputs.message }}
 runs:
   using: "docker"
   image: "Dockerfile"

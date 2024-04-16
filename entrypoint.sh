@@ -31,7 +31,7 @@ EOF
     echo "Failed to deploy app, err: $(cat response_body.txt)"
     exit 1
   fi
-  echo "::set-output name=DEPLOYMENT_ID::$DEPLOYMENT_ID"
+  echo "::set-output name=deployment-id::$DEPLOYMENT_ID"
   rm response_body.txt
 }
 
@@ -61,15 +61,15 @@ check_deployment_status(){
     # keep checking if the status is completed or not, otherwise exit 1
     if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]];
     then
-        echo "::set-output name=MESSAGE::Deployment completed https://app-dev.kapstan.io/applications/application/$INPUT_APPLICATION_ID?tab=deployment"
+        echo "::set-output name=message::Deployment completed https://app-dev.kapstan.io/applications/application/$INPUT_APPLICATION_ID?tab=deployment"
         exit 0
     elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED" ]];
     then
-        echo "::set-output name=MESSAGE::Deployment failed"
+        echo "::set-output name=message::Deployment failed"
         exit 1
     elif [[ $attempt == $MAX_ATTEMPTS ]];
     then 
-        echo "::set-output name=MESSAGE::Failed to get deployment status, exiting after max_attempt reached, last known status: $DEPLOYMENT_STATUS"
+        echo "::set-output name=message::Failed to get deployment status, exiting after max_attempt reached, last known status: $DEPLOYMENT_STATUS"
     else
         echo "Waiting for $RETRY_WAIT_SECONDS seconds before next attempt."
         sleep $RETRY_WAIT_SECONDS
