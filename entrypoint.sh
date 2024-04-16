@@ -88,4 +88,7 @@ MAX_ATTEMPTS_UPPER_THRESHOLD=10
 (( MAX_ATTEMPTS > MAX_ATTEMPTS_UPPER_THRESHOLD )) && MAX_ATTEMPTS=$MAX_ATTEMPTS_UPPER_THRESHOLD
 
 deployment_application
-check_deployment_status
+if [[ $INPUT_WAIT_FOR_DEPLOYMENT ]];
+then
+  check_deployment_status
+fi

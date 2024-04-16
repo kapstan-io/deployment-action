@@ -23,6 +23,10 @@ inputs:
   kapstan_api_key:
     description: "Your Kapstan API key"
     required: true
+  wait_for_deployment:
+    description: "Checks for deployment status and waits till success/failure is returned"
+    required: false
+    default: "true"
 outputs:
   deployment-id:
     description: "The unique identifier of the deployment if no failure while triggering"
@@ -40,3 +44,4 @@ runs:
     - ${{ inputs.image_tag}}
     - ${{ inputs.image_repository_name}}
     - ${{ inputs.kapstan_api_key}}
+    - ${{ inputs.wait_for_deployment}}

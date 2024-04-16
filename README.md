@@ -21,5 +21,6 @@ jobs:
           application_id: [YOUR_KAPSTAN_APPLICATION_ID]
           image_tag: [YOUR_IMAGE_TAG_TO_DEPLOY]
           image_repository_name: [YOUR_KAPSTAN_IAMGE_REPOSITORY_NAME]
-          kapstan_api_key: [YOUR_KAPSTAN_WORKSPACE_API_KEY]
+          kapstan_api_key: [YOUR_KAPSTAN_WORKSPACE_API_KEY] # fetch from secrets
+          wait_for_deployment: [true/false]
 ```
