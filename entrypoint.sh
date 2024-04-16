@@ -35,7 +35,7 @@ EOF
 
 
 get_deployment_status(){
-  deployment_status_url="https://api-dev.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deployments/${INPUT_DEPLOYMENT_ID}"
+  deployment_status_url="https://api-dev.kapstan.io/external/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deployments/${DEPLOYMENT_ID}"
   echo "API URL: $deployment_status_url"
   status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" "$deployment_status_url" \
   -H "Content-Type: application/json" \
