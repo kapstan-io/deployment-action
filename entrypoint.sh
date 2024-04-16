@@ -54,15 +54,15 @@ check_deployment_status(){
   for ((attempt=1; attempt<=MAX_ATTEMPTS; attempt++)); do
     echo "Attempt $attempt"
     
+    # fetch deployment status
     get_deployment_status
 
-    # Your command or action here
-    # For example, check if a service is running
+    # keep checking if the status is completed or not, otherwise exit 1
     if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]];
     then
         echo "Deployment completed"
         exit 0
-    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || attempt == MAX_ATTEMPTS ]];
+    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || $attempt == $MAX_ATTEMPTS ]];
     then
         echo "Deployment failed"
         exit 1
