@@ -1,6 +1,7 @@
 #!/bin/bash
 
 kapstan_api_base_url="https://api.kapstan.io/external"
+filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
 deployment_application() {
@@ -19,38 +20,38 @@ EOF
   echo "API URL: $deployment_trigger_url"
   echo "Request Body: $request_body"
 
-  STATUS_CODE=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
+  STATUS_CODE=$(curl -sSk  -o $filePath -w "%{http_code}" -X POST "$deployment_trigger_url" \
     -H "Content-Type: application/json" \
     -H "x-api-key: $INPUT_KAPSTAN_API_KEY" \
     -d "$request_body")
   
-  echo "Response Body: $(cat response_body.txt)"
+  echo "Response Body: $(cat $filePath)"
   echo "Response Status Code: $STATUS_CODE"
-  DEPLOYMENT_ID=$(cat response_body.txt | jq -r '.deployment_id')
+  DEPLOYMENT_ID=$(cat $filePath | jq -r '.deployment_id')
   
   if [[ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2* ]];
   then
-    echo "Failed to deploy app, err: $(cat response_body.txt)"
+    echo "Failed to deploy app, err: $(cat $filePath)"
     exit 1
   fi
   echo "KAPSTAN_DEPLOYMENT_ID=$DEPLOYMENT_ID" >> "${GITHUB_ENV}"
-  rm response_body.txt
+  rm $filePath
 }
 
 
 get_deployment_status(){
   deployment_status_url="$kapstan_api_base_url/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_ID}/deployments/${DEPLOYMENT_ID}"
   echo "API URL: $deployment_status_url"
-  status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" "$deployment_status_url" \
+  status_code=$(curl -sSk  -o $filePath -w "%{http_code}" "$deployment_status_url" \
   -H "Content-Type: application/json" \
   -H "x-api-key: $INPUT_KAPSTAN_API_KEY")
 
-  response_body=$(cat response_body.txt)
+  response_body=$(cat $filePath)
   echo "Status Code: $status_code"
   echo "Response Body: $response_body"
-  DEPLOYMENT_STATUS=$(cat response_body.txt | jq -r '.stage')
+  DEPLOYMENT_STATUS=$(cat $filePath | jq -r '.stage')
   echo "Deployment Status: $DEPLOYMENT_STATUS"
-  rm response_body.txt
+  rm $filePath
 }
 
 check_deployment_status(){
@@ -79,6 +80,10 @@ check_deployment_status(){
   done
 }
 
+cleanup(){
+  rm -rf $filePath
+}
+
 # defaults
 MAX_ATTEMPTS=${INPUT_MAX_ATTEMPTS:-5}
 RETRY_WAIT_SECONDS=${INPUT_RETRY_WAIT_SECONDS:-15}
@@ -88,6 +93,9 @@ MIN_RETRY_WAIT_SECONDS=15
 
 MAX_ATTEMPTS_UPPER_THRESHOLD=10
 (( MAX_ATTEMPTS > MAX_ATTEMPTS_UPPER_THRESHOLD )) && MAX_ATTEMPTS=$MAX_ATTEMPTS_UPPER_THRESHOLD
+
+# calls cleanup method on exit everytime
+trap cleanup EXIT
 
 deployment_application
 if [[ $INPUT_WAIT_FOR_DEPLOYMENT ]];
