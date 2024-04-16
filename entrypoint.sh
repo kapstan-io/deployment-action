@@ -26,7 +26,7 @@ EOF
   echo "Response Status Code: $STATUS_CODE"
   DEPLOYMENT_ID=$(cat response_body.txt | jq -r '.deployment_id')
   
-  if [ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2*] 
+  if [ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2* ] 
   then
     echo "Failed to deploy app, err: $(cat response_body.txt)"
     exit 1
