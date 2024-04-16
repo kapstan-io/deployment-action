@@ -17,15 +17,20 @@ EOF
   echo "API URL: $deployment_trigger_url"
   echo "Request Body: $request_body"
 
-  status_code=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
+  STATUS_CODE=$(curl -sSk  -o response_body.txt -w "%{http_code}" -X POST "$deployment_trigger_url" \
     -H "Content-Type: application/json" \
     -H "x-api-key: $INPUT_KAPSTAN_API_KEY" \
     -d "$request_body")
   
-  echo "Response Status Code: $status_code"
   echo "Response Body: $(cat response_body.txt)"
+  echo "Response Status Code: $STATUS_CODE"
   DEPLOYMENT_ID=$(cat response_body.txt | jq -r '.deployment_id')
-  echo "::set-output name=DEPLOYMENT_ID::$DEPLOYMENT_ID"
+
+  if [ -z $DEPLOYMENT_ID]; then
+    echo "Failed to deploy app, err: $(cat response_body.txt)"
+    exit 1
+  fi
+  # echo "::set-output name=DEPLOYMENT_ID::$DEPLOYMENT_ID"
 }
 
 
@@ -44,12 +49,31 @@ get_deployment_status(){
   rm response_body.txt
 }
 
-echo "Action - $INPUT_ACTION"
-case $INPUT_ACTION in
-  "deploy-app")
-    deployment_application
-    ;;
-  "get-deployment-status")
+check_deployment_status(){
+  for ((attempt=1; attempt<=MAX_ATTEMPTS; attempt++)); do
+    echo "Attempt $attempt"
+    
     get_deployment_status
-    ;;
-esac
+
+    # Your command or action here
+    # For example, check if a service is running
+    if $DEPLOYMENT_STATUS == "STAGE_COMPLETED"; then
+        echo "Deployment completed"
+        exit 0
+    elif $DEPLOYMENT_STATUS == "STAGE_FAILED";
+        echo "Deployment failed"
+        exit 1
+    else
+        echo "Waiting for $RETRY_WAIT_SECONDS seconds before next attempt."
+        sleep $RETRY_WAIT_SECONDS
+    fi
+  done
+}
+
+# defaults
+MAX_ATTEMPTS=${INPUT_MAX_ATTEMPTS:-5}
+RETRY_WAIT_SECONDS=${INPUT_RETRY_WAIT_SECONDS:-20}
+
+deployment_application
+check_deployment_status
+
