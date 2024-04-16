@@ -60,7 +60,7 @@ check_deployment_status(){
     # keep checking if the status is completed or not, otherwise exit 1
     if [[ $DEPLOYMENT_STATUS == "STAGE_COMPLETED" ]];
     then
-        echo "Deployment completed"
+        echo "Deployment completed https://app-dev.kapstan.io/applications/application/$INPUT_APPLICATION_ID?tab=deployment"
         exit 0
     elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED" ]];
     then
