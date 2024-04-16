@@ -62,10 +62,13 @@ check_deployment_status(){
     then
         echo "Deployment completed"
         exit 0
-    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED"  || $attempt == $MAX_ATTEMPTS ]];
+    elif [[ $DEPLOYMENT_STATUS == "STAGE_FAILED" ]];
     then
         echo "Deployment failed"
         exit 1
+    elif [[ $attempt == $MAX_ATTEMPTS ]];
+    then 
+        echo "Failed to get deployment status, exiting after max_attempt reached, last known status: $DEPLOYMENT_STATUS"
     else
         echo "Waiting for $RETRY_WAIT_SECONDS seconds before next attempt."
         sleep $RETRY_WAIT_SECONDS
