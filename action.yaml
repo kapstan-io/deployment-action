@@ -1,5 +1,5 @@
-name: "Kapstan Deployment Github Action"
-description: "GitHub Action to deploy your applications directly from the Github Pipeline."
+name: "Deploy on Kapstan"
+description: "GitHub Action to deploy your applications directly from the Github Pipeline on Kapstan"
 author: "Kapstan"
 branding:
   icon: activity
@@ -23,6 +23,10 @@ inputs:
   kapstan_api_key:
     description: "Your Kapstan API key"
     required: true
+  wait_for_deployment:
+    description: "Checks for deployment status and waits till success/failure is returned"
+    required: false
+    default: "true"
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -33,3 +37,4 @@ runs:
     - ${{ inputs.image_tag}}
     - ${{ inputs.image_repository_name}}
     - ${{ inputs.kapstan_api_key}}
+    - ${{ inputs.wait_for_deployment}}
