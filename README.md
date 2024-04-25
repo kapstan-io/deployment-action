@@ -14,7 +14,7 @@ jobs:
 
       - name: Deploy on Kapstan
         id: kapstan
-        uses: kapstan-io/deployment-action@dev
+        uses: kapstan-io/deployment-action@v0.3
         with:
           organization_id: [YOUR_KAPSTAN_ORGANIZATION_ID]
           environment_id: [YOUR_KAPSTAN_ENVIRONMENT_ID]
