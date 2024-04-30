@@ -20,7 +20,7 @@ jobs:
           environment_id: [YOUR_KAPSTAN_ENVIRONMENT_ID]
           application_id: [YOUR_KAPSTAN_APPLICATION_ID]
           image_tag: [YOUR_IMAGE_TAG_TO_DEPLOY]
-          pre_deploy_image_tag: [YOUR_IMAGE_TAG_TO_DEPLOY if any, otherwise omit]
+          pre_deploy_image_tag: [YOUR_PRE_DEPLOY_IMAGE_TAG_TO_DEPLOY if any, otherwise omit]
           kapstan_api_key: [YOUR_KAPSTAN_WORKSPACE_API_KEY] # fetch from secrets
           wait_for_deployment: [true/false]
 ```
