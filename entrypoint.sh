@@ -12,7 +12,7 @@ deployment_application() {
 { 
   "imageTag": "$INPUT_IMAGE_TAG",
   "comment": "Reason: Trigger by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
-  "preDeployImageTag: "$PRE_DEPLOY_IMAGE_TAG"
+  "preDeployImageTag": "$PRE_DEPLOY_IMAGE_TAG"
 }
 EOF
 )
