@@ -51,6 +51,7 @@ get_deployment_status(){
   echo "Response Body: $response_body"
   DEPLOYMENT_STATUS=$(cat $filePath | jq -r '.stage')
   echo "Deployment Status: $DEPLOYMENT_STATUS"
+  echo "KAPSTAN_DEPLOYMENT_STATUS=$DEPLOYMENT_STATUS" >> "${GITHUB_ENV}"
   rm $filePath
 }
 
