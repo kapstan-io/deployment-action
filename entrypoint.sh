@@ -1,11 +1,11 @@
 #!/bin/bash
 
-kapstan_api_base_url="https://api.kapstan.io/external/v2"
+kapstan_api_base_url="https://api.kapstan.io/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
 deployment_application() {
-  deployment_trigger_url="$kapstan_api_base_url/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_NAME}/deploy"
+  deployment_trigger_url="$kapstan_api_base_url/applications/${INPUT_APPLICATION_NAME}/deploy"
 
   # Build the JSON request body
   request_body=$(cat <<EOF
@@ -40,7 +40,7 @@ EOF
 
 
 get_deployment_status(){
-  deployment_status_url="$kapstan_api_base_url/organizations/${INPUT_ORGANIZATION_ID}/workspaces/$INPUT_ENVIRONMENT_ID/applications/${INPUT_APPLICATION_NAME}/deployments/${DEPLOYMENT_ID}"
+  deployment_status_url="$kapstan_api_base_url/applications/${INPUT_APPLICATION_NAME}/deployments/${DEPLOYMENT_ID}"
   echo "API URL: $deployment_status_url"
   status_code=$(curl -sSk  -o $filePath -w "%{http_code}" "$deployment_status_url" \
   -H "Content-Type: application/json" \
