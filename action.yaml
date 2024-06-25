@@ -5,14 +5,8 @@ branding:
   icon: activity
   color: purple
 inputs:
-  organization_id:
-    description: "The unique identifier of the organization"
-    required: true
-  environment_id:
-    description: "The unique identifier of the environment"
-    required: true
-  application_id:
-    description: "The unique identifier of the application"
+  application_name:
+    description: "The name of the application"
     required: true
   image_tag:
     description: "The image tag you want to deploy"
@@ -35,9 +29,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.organization_id}}
-    - ${{ inputs.environment_id}}
-    - ${{ inputs.application_id}}
+    - ${{ inputs.application_name}}
     - ${{ inputs.image_tag}}
     - ${{ inputs.pre_deploy_image_tag}}
     - ${{ inputs.kapstan_api_key}}
