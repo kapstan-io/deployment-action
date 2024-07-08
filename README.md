@@ -27,3 +27,5 @@ jobs:
 > `KAPSTAN_DEPLOYMENT_STATUS` has value `STAGE_COMPLETED` when deployment is successful and would have other status based on error.
 
 To create `YOUR_KAPSTAN_WORKSPACE_API_KEY`, navigate to the environments page and go to the settings of the environment for which you want to create the API Key. Click on create new API Key, and save the generate API Key. Wire it into the github secrets and use it here!
+
+> Keep in mind to enable the `Programmatic deployment` from the `Deployment Settings` tab in the application's config.
