@@ -11,7 +11,7 @@ deployment_application() {
   request_body=$(cat <<EOF
 { 
   "imageTag": "$INPUT_IMAGE_TAG",
-  "comment": "Reason: Trigger by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
+  "comment": "Deployment triggered by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
   "preDeployImageTag": "$PRE_DEPLOY_IMAGE_TAG"
 }
 EOF
