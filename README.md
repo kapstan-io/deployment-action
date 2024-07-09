@@ -26,6 +26,6 @@ jobs:
 > There are three environment variables exposed as `KAPSTAN_DEPLOYMENT_ID`, `KAPSTAN_DEPLOYMENT_MESSAGE` and `KAPSTAN_DEPLOYMENT_STATUS`. Deployment action returns with exit(0) only when all steps are successful, otherwise it'll fail with exit(1).
 > `KAPSTAN_DEPLOYMENT_STATUS` has value `STAGE_COMPLETED` when deployment is successful and would have other status based on error.
 
-To create `YOUR_KAPSTAN_WORKSPACE_API_KEY`, navigate to the environments page and go to the settings of the environment for which you want to create the API Key. Click on create new API Key, and save the generate API Key. Wire it into the github secrets and use it here!
+To create `YOUR_KAPSTAN_WORKSPACE_API_KEY`, navigate to the environments page and go to the settings of the environment for which you want to create the API Key. Click on create new API Key, and save the generated API Key. Wire it into the github secrets and use it here!
 
 > Keep in mind to enable the `Programmatic deployment` from the `Deployment Settings` tab in the application's config.
