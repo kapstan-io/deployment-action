@@ -1,19 +1,28 @@
 #!/bin/bash
 
+INPUT_APPLICATION_NAME="$1"
+INPUT_IMAGE_TAG="$2"
+INPUT_PRE_DEPLOY_IMAGE_TAG="$3"
+INPUT_KAPSTAN_API_KEY="$4"
+INPUT_WAIT_FOR_DEPLOYMENT="$5"
+INPUT_CONTAINERS_YAML="$6"
+
+
 kapstan_api_base_url="https://api.kapstan.io/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
 deployment_application() {
   deployment_trigger_url="$kapstan_api_base_url/applications/${INPUT_APPLICATION_NAME}/deploy"
+  INPUT_CONTAINERS_JSON=$(echo "$INPUT_CONTAINERS_YAML" | yq eval -o=json)
 
   # Build the JSON request body
   request_body=$(cat <<EOF
 { 
   "imageTag": "$INPUT_IMAGE_TAG",
   "comment": "Deployment triggered by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
-  "preDeployImageTag": "$PRE_DEPLOY_IMAGE_TAG",
-  "containers": $CONTAINERS
+  "preDeployImageTag": "$INPUT_PRE_DEPLOY_IMAGE_TAG",
+  "containers": $INPUT_CONTAINERS_JSON
 }
 EOF
 )
@@ -28,13 +37,14 @@ EOF
   
   echo "Response Body: $(cat $filePath)"
   echo "Response Status Code: $STATUS_CODE"
-  DEPLOYMENT_ID=$(cat $filePath | jq -r '.deployment_id')
   
-  if [[ -z "$DEPLOYMENT_ID"  || $STATUS_CODE != 2* ]];
+  
+  if [[ $STATUS_CODE != 2* ]];
   then
     echo "Failed to deploy app, err: $(cat $filePath)"
     exit 1
   fi
+  DEPLOYMENT_ID=$(cat $filePath | jq -r '.deployment_id')
   echo "KAPSTAN_DEPLOYMENT_ID=$DEPLOYMENT_ID" >> "${GITHUB_ENV}"
   rm $filePath
 }
