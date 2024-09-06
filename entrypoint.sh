@@ -1,5 +1,13 @@
 #!/bin/bash
 
+INPUT_APPLICATION_NAME="$1"
+INPUT_IMAGE_TAG="$2"
+INPUT_PRE_DEPLOY_IMAGE_TAG="$3"
+INPUT_KAPSTAN_API_KEY="$4"
+INPUT_WAIT_FOR_DEPLOYMENT="$5"
+INPUT_CONTAINERS_JSON="$6"
+
+
 kapstan_api_base_url="https://localhost:5050/v2/external"
 filePath="/tmp/response.txt"
 
@@ -12,8 +20,8 @@ deployment_application() {
 { 
   "imageTag": "$INPUT_IMAGE_TAG",
   "comment": "Deployment triggered by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
-  "preDeployImageTag": "$PRE_DEPLOY_IMAGE_TAG",
-  "containers": "$CONTAINERS"
+  "preDeployImageTag": "$INPUT_PRE_DEPLOY_IMAGE_TAG",
+  "containers": $INPUT_CONTAINERS_JSON
 }
 EOF
 )
