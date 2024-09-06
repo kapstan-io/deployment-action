@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kapstan_api_base_url="https://api.kapstan.io/v2/external"
+kapstan_api_base_url="https://localhost:5050/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
