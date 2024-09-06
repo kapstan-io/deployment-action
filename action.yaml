@@ -38,4 +38,4 @@ runs:
     - ${{ inputs.pre_deploy_image_tag}}
     - ${{ inputs.kapstan_api_key}}
     - ${{ inputs.wait_for_deployment}}
-    - ${{ toJson(inputs.containers) }}
+    - ${{ inputs.containers }}
