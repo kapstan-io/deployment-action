@@ -25,6 +25,10 @@ inputs:
     description: "The image tag for pre-deploy job if you want to deploy, sending null/blank to use the existing version"
     required: false
     default: ''
+  containers:
+    description: "Array of container objects with name and imageTag. Empty tags would be omitted"
+    required: false
+
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -34,3 +38,4 @@ runs:
     - ${{ inputs.pre_deploy_image_tag}}
     - ${{ inputs.kapstan_api_key}}
     - ${{ inputs.wait_for_deployment}}
+    - ${{ inputs.containers }}
