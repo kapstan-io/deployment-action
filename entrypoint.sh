@@ -22,7 +22,7 @@ deployment_application() {
   "imageTag": "$INPUT_IMAGE_TAG",
   "comment": "Deployment triggered by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
   "preDeployImageTag": "$INPUT_PRE_DEPLOY_IMAGE_TAG",
-  "deploymentContainerUpdate": $INPUT_CONTAINERS_JSON
+  "containersUpdate": $INPUT_CONTAINERS_JSON
 }
 EOF
 )
