@@ -1,18 +1,12 @@
-name: "Kapstan Deployment Github Action"
-description: "GitHub Action to deploy your applications directly from the Github Pipeline."
+name: "Deploy on Kapstan"
+description: "GitHub Action to deploy your applications directly from the Github Pipeline on Kapstan"
 author: "Kapstan"
 branding:
   icon: activity
   color: purple
 inputs:
-  organization_id:
-    description: "The unique identifier of the organization"
-    required: true
-  environment_id:
-    description: "The unique identifier of the environment"
-    required: true
-  application_id:
-    description: "The unique identifier of the application"
+  application_name:
+    description: "The name of the application"
     required: true
   image_tag:
     description: "The image tag you want to deploy"
@@ -23,6 +17,7 @@ inputs:
   kapstan_api_key:
     description: "Your Kapstan API key"
     required: true
+<<<<<<< HEAD
 outputs:
   deployment-id:
     description: "The unique identifier of the deployment if no failure while triggering"
@@ -30,13 +25,27 @@ outputs:
   message:
     description: "Message of action denoting status of deployment"
     value: ${{ steps.kapstan-deployment-action.outputs.message }}
+=======
+  wait_for_deployment:
+    description: "Checks for deployment status and waits till success/failure is returned"
+    required: false
+    default: "true"
+  pre_deploy_image_tag:
+    description: "The image tag for pre-deploy job if you want to deploy, sending null/blank to use the existing version"
+    required: false
+    default: ''
+  containers:
+    description: "Array of container objects with name and imageTag. Empty tags would be omitted"
+    required: false
+
+>>>>>>> main
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.organization_id}}
-    - ${{ inputs.environment_id}}
-    - ${{ inputs.application_id}}
+    - ${{ inputs.application_name}}
     - ${{ inputs.image_tag}}
-    - ${{ inputs.image_repository_name}}
+    - ${{ inputs.pre_deploy_image_tag}}
     - ${{ inputs.kapstan_api_key}}
+    - ${{ inputs.wait_for_deployment}}
+    - ${{ inputs.containers }}
