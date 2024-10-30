@@ -111,7 +111,7 @@ MAX_ATTEMPTS_UPPER_THRESHOLD=120
 trap cleanup EXIT
 
 deployment_application
-if [[ $INPUT_WAIT_FOR_DEPLOYMENT ]];
+if [[ $INPUT_WAIT_FOR_DEPLOYMENT == true ]];
 then
   check_deployment_status
 fi
