@@ -16,7 +16,7 @@ jobs:
 
       - name: Deploy on Kapstan
         id: kapstan
-        uses: kapstan-io/deployment-action@v0.3
+        uses: kapstan-io/deployment-action@v0.7
         with:
           application_name: [YOUR_KAPSTAN_APPLICATION_NAME]
           image_tag: [YOUR_IMAGE_TAG_TO_DEPLOY]
@@ -39,7 +39,7 @@ jobs:
 
       - name: Deploy on Kapstan
         id: kapstan
-        uses: kapstan-io/deployment-action@v0.3
+        uses: kapstan-io/deployment-action@v0.7
         with:
           application_name: [YOUR_KAPSTAN_APPLICATION_NAME]
           kapstan_api_key: [YOUR_KAPSTAN_ENVIRONMENT_API_KEY] # fetch from secrets
