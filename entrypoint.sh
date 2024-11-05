@@ -8,7 +8,7 @@ INPUT_WAIT_FOR_DEPLOYMENT="$5"
 INPUT_CONTAINERS_YAML="$6"
 
 
-kapstan_api_base_url="https://app-dev.kapstan.io/api/v2/external"
+kapstan_api_base_url="https://staging.kapstan.io/api/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
