@@ -6,6 +6,7 @@ INPUT_PRE_DEPLOY_IMAGE_TAG="$3"
 INPUT_KAPSTAN_API_KEY="$4"
 INPUT_WAIT_FOR_DEPLOYMENT="$5"
 INPUT_CONTAINERS_YAML="$6"
+INPUT_COMMIT_DETAILS="$7"
 
 
 kapstan_api_base_url="https://api.kapstan.io/v2/external"
@@ -22,7 +23,8 @@ deployment_application() {
   "imageTag": "$INPUT_IMAGE_TAG",
   "comment": "Deployment triggered by action ${GITHUB_EVENT_NAME} on ${GITHUB_REF_NAME} in ${GITHUB_REPOSITORY}",
   "preDeployImageTag": "$INPUT_PRE_DEPLOY_IMAGE_TAG",
-  "containersUpdate": $INPUT_CONTAINERS_JSON
+  "containersUpdate": $INPUT_CONTAINERS_JSON,
+  "commitDetails": "$INPUT_COMMIT_DETAILS"
 }
 EOF
 )
