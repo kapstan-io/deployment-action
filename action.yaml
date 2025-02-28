@@ -28,9 +28,6 @@ inputs:
   containers:
     description: "Array of container objects with name and imageTag. Empty tags would be omitted"
     required: false
-  commit_details:
-      description: "https://github.com/kapstan-io/shadowfax/commit/d0cb228ba5465db48b431f88c47547c72a125029"
-      required: false
 
 
 runs:
@@ -43,4 +40,3 @@ runs:
     - ${{ inputs.kapstan_api_key}}
     - ${{ inputs.wait_for_deployment}}
     - ${{ inputs.containers }}
-    - ${{ inputs.commit_details }}
