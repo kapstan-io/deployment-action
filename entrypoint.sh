@@ -9,7 +9,7 @@ INPUT_CONTAINERS_YAML="$6"
 
 COMMIT_DETAILS="https://github.com/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}"
 
-kapstan_api_base_url="https://api.kapstan.io/v2/external"
+kapstan_api_base_url="https://fast_e2e.app-dev.kapstan.io/api/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
