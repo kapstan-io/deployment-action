@@ -84,6 +84,10 @@ check_deployment_status(){
     then
         echo "KAPSTAN_DEPLOYMENT_MESSAGE='Deployment failed'" >> "$GITHUB_ENV"
         exit 1
+    elif [[ $DEPLOYMENT_STATUS == "STAGE_CANCELED" ]];
+    then
+        echo "KAPSTAN_DEPLOYMENT_MESSAGE='Deployment canceled'" >> "$GITHUB_ENV"
+        exit 1
     elif [[ $attempt == $MAX_ATTEMPTS ]];
     then 
         echo "KAPSTAN_DEPLOYMENT_MESSAGE='Failed to get deployment status, exiting after max_attempt reached, last known status: $DEPLOYMENT_STATUS'" >> "$GITHUB_ENV"
