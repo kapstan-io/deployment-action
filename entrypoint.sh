@@ -9,7 +9,7 @@ INPUT_CONTAINERS_YAML="$6"
 
 COMMIT_DETAILS="https://github.com/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}"
 
-kapstan_api_base_url="https://api.kapstan.io/v2/external"
+kapstan_api_base_url="https://app-dev.kapstan.io/api/v2/external"
 filePath="/tmp/response.txt"
 
 # Function to trigger application deployment
@@ -62,7 +62,7 @@ get_deployment_status(){
   response_body=$(cat $filePath)
   echo "Status Code: $status_code"
   echo "Response Body: $response_body"
-  DEPLOYMENT_STATUS=$(cat $filePath | jq -r '.stage')
+  DEPLOYMENT_STATUS=$(cat $filePath | jq -r '.Deployment.stage // .stage')
   echo "Deployment Status: $DEPLOYMENT_STATUS"
   echo "KAPSTAN_DEPLOYMENT_STATUS=$DEPLOYMENT_STATUS" >> "${GITHUB_ENV}"
   rm $filePath
