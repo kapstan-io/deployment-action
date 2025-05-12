@@ -13,7 +13,7 @@ inputs:
     required: false
   image_repository_name:
     description: "The image repository name that this image tag belongs to"
-    required: true
+    required: false
   kapstan_api_key:
     description: "Your Kapstan API key"
     required: true
